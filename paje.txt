@@ -1,0 +1,83 @@
+"use client";
+
+import Header from '../components/Header';
+import { HiOutlineViewGridAdd } from 'react-icons/hi';
+import { useState, useEffect } from 'react';
+
+export default function Productos() {
+  const [productos, setProductos] = useState([]);
+  const [isAbierto, setIsAbierto] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/productos');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProductos(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const abrirModal = () => {
+    setIsAbierto(!isAbierto);
+  }
+
+  return (
+    <div>
+      <Header title="productos" />
+      <div className="min-h-screen bg-gray-100 p-5">
+        <div className="flex justify-between">
+          <div>
+            {/* Aquí podrías añadir más elementos si es necesario */}
+          </div>
+          <div className="w-72 flex justify-between items-center">
+            <div className="w-64">
+              <input
+                type="text"
+                className="px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Buscar..."
+              />
+            </div>
+            <div className="w-1.5"></div>
+            <div>
+              <div onClick={abrirModal} className="h-10 w-10 bg-indigo-600 rounded-sm flex justify-center items-center cursor-pointer">
+                <HiOutlineViewGridAdd color="white" className="h-6 w-6" />
+              </div>
+              <div className={`fixed top-0 right-0 h-full bg-gray-100 text-black transition-transform transform ${isAbierto ? 'translate-x-0' : 'translate-x-full'} w-64 shadow-lg z-50`}>
+                <div className="p-4">
+                  <button onClick={abrirModal} className="text-black hover:text-gray-500">
+                    &times;
+                  </button>
+                  <h2 className="text-lg font-bold">Sidebar Content</h2>
+                  <p>Your content goes here.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+          {productos.map((producto) => (
+            <div key={producto.id} className="bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
+              <img className="rounded-xl w-full" src={producto.imagen} />
+              <div className="p-5">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h1 className="text-2xl font-semibold"> {producto.nombre}</h1>
+                    <p>${producto.precio}</p>
+                    <p>stock: {producto.stock}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
