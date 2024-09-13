@@ -12,7 +12,8 @@ module.exports = {
       colors: {
         customBlue: '#7296e9',
         azul2: "#c5d5ff",
-        azulProfundo: "#3333cf"
+        azulProfundo: "#3333cf",
+        grayCustom: "#f1f2f2 " ,
       },
       fontFamily: {
         'roboto-condensed': ['"Roboto Condensed Variable"', 'sans-serif'],

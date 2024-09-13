@@ -1,83 +1,124 @@
-"use client";
+// app/api/clientes/route.js
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
 
-import Header from '../components/Header';
-import { HiOutlineViewGridAdd } from 'react-icons/hi';
-import { useState, useEffect } from 'react';
+export async function handler(request) {
+  const method = request.method;
 
-export default function Productos() {
-  const [productos, setProductos] = useState([]);
-  const [isAbierto, setIsAbierto] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/productos');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setProductos(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const abrirModal = () => {
-    setIsAbierto(!isAbierto);
+  switch (method) {
+    case 'POST':
+      return await crearCliente(request);
+      
+    case 'GET':
+      return await obtenerClientes(request);
+      
+    case 'PUT':
+      return await editarCliente(request);
+      
+    case 'DELETE':
+      return await eliminarCliente(request);
+      
+    default:
+      return NextResponse.json({ message: 'Método no permitido' }, { status: 405 });
   }
+}
 
-  return (
-    <div>
-      <Header title="productos" />
-      <div className="min-h-screen bg-gray-100 p-5">
-        <div className="flex justify-between">
-          <div>
-            {/* Aquí podrías añadir más elementos si es necesario */}
-          </div>
-          <div className="w-72 flex justify-between items-center">
-            <div className="w-64">
-              <input
-                type="text"
-                className="px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Buscar..."
-              />
-            </div>
-            <div className="w-1.5"></div>
-            <div>
-              <div onClick={abrirModal} className="h-10 w-10 bg-indigo-600 rounded-sm flex justify-center items-center cursor-pointer">
-                <HiOutlineViewGridAdd color="white" className="h-6 w-6" />
-              </div>
-              <div className={`fixed top-0 right-0 h-full bg-gray-100 text-black transition-transform transform ${isAbierto ? 'translate-x-0' : 'translate-x-full'} w-64 shadow-lg z-50`}>
-                <div className="p-4">
-                  <button onClick={abrirModal} className="text-black hover:text-gray-500">
-                    &times;
-                  </button>
-                  <h2 className="text-lg font-bold">Sidebar Content</h2>
-                  <p>Your content goes here.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-          {productos.map((producto) => (
-            <div key={producto.id} className="bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
-              <img className="rounded-xl w-full" src={producto.imagen} />
-              <div className="p-5">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h1 className="text-2xl font-semibold"> {producto.nombre}</h1>
-                    <p>${producto.precio}</p>
-                    <p>stock: {producto.stock}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+async function crearCliente(request) {
+  try {
+    const body = await request.json();
+    console.log('Datos recibidos para crear cliente:', body);
+
+    const { tipoDocumento, codigoCliente, lugar, direccion, numeroDocumento, nombre } = body;
+    
+    // Validación de campos requeridos
+    if (!tipoDocumento || !codigoCliente || !lugar || !direccion || !numeroDocumento || !nombre) {
+      return NextResponse.json({ message: 'Todos los campos son requeridos' }, { status: 400 });
+    }
+
+    // Crear el cliente en Prisma
+    const cliente = await prisma.cliente.create({
+      data: {
+        tipoDocumento,
+        codigoCliente,
+        lugar,
+        direccion,
+        numeroDocumento,
+        nombre
+      },
+    });
+
+    console.log('Cliente creado en Prisma:', cliente);
+    return NextResponse.json(cliente, { status: 201 });
+  } catch (error) {
+    console.error('Error al crear el cliente:', error);
+    if (error.code === 'P2002') {
+      return NextResponse.json({ message: 'El código de cliente o número de documento ya existe' }, { status: 400 });
+    }
+    return NextResponse.json({ message: 'Error al crear el cliente', error: error.message }, { status: 400 });
+  }
+}
+
+async function obtenerClientes(request) {
+  try {
+    const clientes = await prisma.cliente.findMany();
+    return NextResponse.json(clientes, { status: 200 });
+  } catch (error) {
+    console.error('Error al obtener clientes:', error);
+    return NextResponse.json({ message: 'Error al obtener clientes', error: error.message }, { status: 500 });
+  }
+}
+
+async function editarCliente(request) {
+  try {
+    const body = await request.json();
+    console.log('Datos recibidos para editar cliente:', body);
+
+    const { id, tipoDocumento, codigoCliente, lugar, direccion, numeroDocumento, nombre } = body;
+    
+    // Validación de campos requeridos
+    if (!id || !tipoDocumento || !codigoCliente || !lugar || !direccion || !numeroDocumento || !nombre) {
+      return NextResponse.json({ message: 'Todos los campos son requeridos' }, { status: 400 });
+    }
+
+    // Editar el cliente en Prisma
+    const cliente = await prisma.cliente.update({
+      where: { id },
+      data: {
+        tipoDocumento,
+        codigoCliente,
+        lugar,
+        direccion,
+        numeroDocumento,
+        nombre
+      },
+    });
+
+    console.log('Cliente editado en Prisma:', cliente);
+    return NextResponse.json(cliente, { status: 200 });
+  } catch (error) {
+    console.error('Error al editar el cliente:', error);
+    return NextResponse.json({ message: 'Error al editar el cliente', error: error.message }, { status: 400 });
+  }
+}
+
+async function eliminarCliente(request) {
+  try {
+    const { id } = await request.json();
+    console.log('ID recibido para eliminar cliente:', id);
+
+    if (!id) {
+      return NextResponse.json({ message: 'El ID es requerido' }, { status: 400 });
+    }
+
+    // Eliminar el cliente en Prisma
+    await prisma.cliente.delete({
+      where: { id },
+    });
+
+    console.log('Cliente eliminado de Prisma:', id);
+    return NextResponse.json({ message: 'Cliente eliminado correctamente' }, { status: 204 });
+  } catch (error) {
+    console.error('Error al eliminar el cliente:', error);
+    return NextResponse.json({ message: 'Error al eliminar el cliente', error: error.message }, { status: 400 });
+  }
 }

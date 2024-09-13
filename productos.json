@@ -1,0 +1,476 @@
+{
+    "productos": {
+        "06ZGKiNyOvj4YooxkX3R": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1707831591327.jpg?alt=media&token=30dddf6e-c3fe-44a9-937a-ca19837eb202",
+            "precioDeVenta": 17.5,
+            "nombre": "Kris Fruit 1500 Lt x 6 und",
+            "precioDeCompra": 14.88,
+            "peso": 6,
+            "stock": 0
+        },
+        "3lJznPHzz1jwtTUZuoCJ": {
+            "precioDeVenta": 20,
+            "nombre": "360 Maracuya 300ML x 12und",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A08%3A29.976942.jpg?alt=media&token=981ac553-8d54-4d59-922f-c355c9736995",
+            "precioDeCompra": 17,
+            "peso": 3.6,
+            "stock": 4
+        },
+        "5MMPlfFA4mo6gB8ivAjB": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A35%3A23.731272.jpg?alt=media&token=d635d559-657b-4a71-8c0c-8e2a241b6d05",
+            "nombre": "KRIS SURTIDO-RED,GREEN,FRUIT-400ML. x15und",
+            "peso": 6,
+            "precioDeVenta": 12.5,
+            "precioDeCompra": 10.62,
+            "stock": 0
+        },
+        "8Ak55QAeOs8g2BF5Jydt": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A46%3A23.781414.jpg?alt=media&token=15c2113e-d0ea-420e-aa45-ecd9878957c7",
+            "precioDeVenta": 26.5,
+            "nombre": "Fruvi Durazno 1LT x 6 und ",
+            "precioDeCompra": 21.36,
+            "peso": 3.6,
+            "stock": 0
+        },
+        "8AoPLc12ITQxETBXfvek": {
+            "precioDeVenta": 20,
+            "nombre": "Fruvi Mango 300ml",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-12%2008%3A12%3A51.942317.jpg?alt=media&token=ceaaad63-c3a7-4a62-8342-7c85cb304891",
+            "precioDeCompra": 16.53,
+            "peso": 3.6,
+            "stock": 0
+        },
+        "8SDA9mv8c8v7kPNCZI4f": {
+            "nombre": "KERO ALOE SURTIDO-UVA,PIÑA.300ML x12und",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-29%2008%3A22%3A15.132402.jpg?alt=media&token=b3055d23-c882-4ffc-9882-0e9bf8a0442b",
+            "precioDeVenta": 30,
+            "precioDeCompra": 25.2,
+            "peso": 3.6,
+            "stock": 0
+        },
+        "8qglqUfgc1P5BW6maA1G": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-24%2018%3A46%3A22.387804.jpg?alt=media&token=122aea11-42c1-40b0-8c06-bfed56b21bd9",
+            "nombre": "KERO ALOE UVA 300ML x12UND",
+            "precioDeCompra": 25.2,
+            "peso": 3.6,
+            "precioDeVenta": 30,
+            "stock": 21
+        },
+        "8x9iDj1HWcuWNHjweirC": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A56%3A39.938554.jpg?alt=media&token=30fc2a0c-0917-4003-80ed-3ab328de0bb2",
+            "precioDeVenta": 12.5,
+            "nombre": "KRIS FRUIT PUNCH 350 ML X 15 UND",
+            "peso": 10.62,
+            "precioDeCompra": 10.62,
+            "stock": 45
+        },
+        "AQp0N0bpk2nCfo7Xx0Ff": {
+            "nombre": "PAPAS BBQ Y CEBOLLA 135G- FAMILIAR",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A09%3A09.418663.jpg?alt=media&token=320d0590-bd55-4c8e-bffe-ca6963cc8baf",
+            "precioDeCompra": 5.67,
+            "peso": 0.135,
+            "precioDeVenta": 6.5,
+            "stock": 59
+        },
+        "AZmImc1oBNRsIKCq72fj": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1703079236467.jpg?alt=media&token=025728f0-c974-4a65-8049-b3630f20814a",
+            "precioDeVenta": 22.5,
+            "stock": 0,
+            "precioDeCompra": 19.35,
+            "peso": 12,
+            "nombre": "COOL FRESH 2LT MIX -COLA ,PIÑA Y AMARILLO X 6 UND"
+        },
+        "Aecer4WTr3FPV2jDfsAn": {
+            "precioDeVenta": 26.5,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-13%2020%3A47%3A31.993351.jpg?alt=media&token=9d17c2eb-99e6-4575-8947-46c55ed618ee",
+            "nombre": "FRUVI MANGO 1LT X 6 UND",
+            "precioDeCompra": 21.36,
+            "peso": 6,
+            "stock": 3
+        },
+        "CDgLCRzWmDqystalLfft": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A16%3A29.193721.jpg?alt=media&token=cbf757a0-06d0-4b9f-a1b5-49e3a099b8bc",
+            "precioDeVenta": 10,
+            "peso": 2.5,
+            "nombre": "Drinkt limón 475 ML x 6 unid ",
+            "precioDeCompra": 8.25,
+            "stock": 0
+        },
+        "CxFIZxCcyjRlgf1UiZrd": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1713299699353.jpg?alt=media&token=6f7f901e-6e11-486b-8388-5f6fec15bf07",
+            "peso": 9,
+            "precioDeVenta": 12,
+            "precioDeCompra": 11.16,
+            "nombre": "Agua Cielo 625 ml ",
+            "stock": 0
+        },
+        "IVbHJNabqzIweiBYtfjB": {
+            "nombre": "PAPAS JALAPEÑO 135G- FAMILIAR",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A09%3A37.230875.jpg?alt=media&token=23776858-4d8e-4ee8-aac2-33b67dc11e67",
+            "precioDeCompra": 5.67,
+            "peso": 0.135,
+            "precioDeVenta": 6.5,
+            "stock": 137
+        },
+        "JBnjjxaNL6j7vkrLBHKV": {
+            "precioDeVenta": 10,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A09%3A51.609107.jpg?alt=media&token=c1366848-dcf0-4f83-a314-ed3c2ed67d7f",
+            "precioDeCompra": 9.02,
+            "peso": 0.18,
+            "nombre": "PAPAS BBQ CEBOLLA-TIRA 6 UND 30G",
+            "stock": 46
+        },
+        "OCP1fmZHX7FFrp72CJ5U": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A30%3A15.658484.jpg?alt=media&token=bfcc7c7a-3c9e-4b8d-b1e9-0cc21e779f1e",
+            "nombre": "Agua Loa 1LT x 12 und",
+            "precioDeCompra": 17.4,
+            "peso": 12,
+            "precioDeVenta": 20,
+            "stock": 0
+        },
+        "OlGTKhkbZlGd64dbidn6": {
+            "precioDeVenta": 20,
+            "nombre": "Generade Uva 500ML x 12und",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-07%2008%3A46%3A46.940719.jpg?alt=media&token=ab480574-7eff-493f-8a91-7b153d728ad1",
+            "precioDeCompra": 16.8,
+            "peso": 6,
+            "stock": 0
+        },
+        "P7DRXofbXCNgcwvJzhc7": {
+            "precioDeVenta": 20,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A06%3A50.578213.jpg?alt=media&token=49251e39-1aad-4222-82eb-74d70652f205",
+            "nombre": "360 Frambuesa 300ML x 12 und",
+            "precioDeCompra": 17,
+            "peso": 3.6,
+            "stock": 2
+        },
+        "Q4JXGcIhpYLjjPcRpyQY": {
+            "precioDeVenta": 20,
+            "nombre": "Fruvi Durazno x 12 unid 300 ML ",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-13%2021%3A52%3A10.702074.jpg?alt=media&token=ed47ef2a-3d8c-4ada-8986-a8b4d853896c",
+            "precioDeCompra": 16.53,
+            "peso": 3.6,
+            "stock": 1
+        },
+        "SPZaYNGPCWcKMNvoz0aH": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-14%2013%3A50%3A20.244081.jpg?alt=media&token=d23aa797-1341-45ab-b103-ee26ff5d40e9",
+            "nombre": "COOL SURTIDO - COLA,PIÑA Y AMARILLA 350 ML X 15 UNID ",
+            "precioDeVenta": 12.5,
+            "peso": 7,
+            "precioDeCompra": 10.9,
+            "stock": 2
+        },
+        "Sj0xccLZG15ueNBniW1z": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1711822167596.jpg?alt=media&token=a1879894-b8d2-48f8-bffd-6c7e34ee25a2",
+            "peso": 5.5,
+            "precioDeCompra": 11.34,
+            "nombre": "KR Limón 350 ml x 15 unid ",
+            "precioDeVenta": 12.5,
+            "stock": 0
+        },
+        "TN38ILAVITlXxVjHtYqp": {
+            "precioDeVenta": 30,
+            "nombre": "Kero Jugo Camu Camu",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-13%2021%3A54%3A35.276322.jpg?alt=media&token=b931c856-cec3-4889-9fb9-deb64ec83fae",
+            "precioDeCompra": 25.2,
+            "peso": 3.6,
+            "stock": 0
+        },
+        "TgyqsxxFxeLXddyvMNZR": {
+            "precioDeVenta": 22.62,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A33%3A51.756968.jpg?alt=media&token=7c07c630-4f88-4b5a-a8d1-6db476bd035c",
+            "nombre": "AGUA LOA CAJA 20LT",
+            "precioDeCompra": 19.91,
+            "peso": 20,
+            "stock": 2
+        },
+        "Tjo1yJHiXRHu0GvXFdHy": {
+            "precioDeVenta": 10,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A10%3A05.505721.jpg?alt=media&token=041bc186-e46c-4c57-ae33-971247355ef7",
+            "nombre": "PAPAS SAL MAR-TIRA 6 UND 33G",
+            "precioDeCompra": 9.02,
+            "peso": 0.18,
+            "stock": 0
+        },
+        "Vt2Fuo8W3t6nYTzUqDyM": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1707831591327.jpg?alt=media&token=30dddf6e-c3fe-44a9-937a-ca19837eb202",
+            "nombre": "KRIS PUNCH MIX-GREEN,FRUIT. 1,5 LT X6UN",
+            "precioDeVenta": 17.5,
+            "precioDeCompra": 14.88,
+            "peso": 6,
+            "stock": 0
+        },
+        "ZYD2mpl1eCicECGF3kMn": {
+            "precioDeVenta": 20,
+            "nombre": "Generade Mora Azul 500ML x 12und",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-07%2008%3A48%3A26.399630.jpg?alt=media&token=59c6fd67-c64a-47a6-9416-ca46ca867ed9",
+            "precioDeCompra": 16.8,
+            "peso": 6,
+            "stock": 1
+        },
+        "aBrBzxkejAUh3SUJ82pq": {
+            "precioDeVenta": 20,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A41%3A56.034433.jpg?alt=media&token=88db201d-2a61-413e-95a7-aa8a4d004a58",
+            "nombre": "360 SURTIDO-MARACUYA,FRAMBUESA 300ML",
+            "precioDeCompra": 17,
+            "peso": 3.6,
+            "stock": 0
+        },
+        "bpg7l3v0FghvROkrbH9a": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1711822225675.jpg?alt=media&token=1031c56f-7b22-4039-8687-9e8b5d48cd11",
+            "peso": 5.5,
+            "precioDeCompra": 11.34,
+            "nombre": "KR Naranja 350 ml x 15 unid ",
+            "precioDeVenta": 12.5,
+            "stock": 5
+        },
+        "cLBr7gRkYVjq4596KDXV": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1723210674943.jpg?alt=media&token=aed5188d-e378-4215-bbed-6a303054809a",
+            "peso": 0,
+            "precioDeVenta": 20,
+            "precioDeCompra": 18.6,
+            "nombre": "Agua Cielo 1LT x 12 und",
+            "stock": 0
+        },
+        "dg83H0XUKqIt9eJQXMiW": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1711822346112.jpg?alt=media&token=7f1ea507-6663-424b-98c0-2b0295bfdc79",
+            "peso": 5.5,
+            "precioDeCompra": 11.34,
+            "nombre": "KR Fresa 350 ml x 15 unid ",
+            "precioDeVenta": 12.5,
+            "stock": 0
+        },
+        "f4xN9XCqTeFcSo5rqblU": {
+            "precioDeVenta": 10,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A10%3A19.122163.jpg?alt=media&token=164ac67c-026c-47d6-821c-379aa42815be",
+            "nombre": "PAPAS JALAPEÑO-TIRA X 6 UND 30g",
+            "precioDeCompra": 9.02,
+            "peso": 0.18,
+            "stock": 57
+        },
+        "grAdIEFVXWFs7v08NNJz": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-04%2002%3A26%3A01.779305.jpg?alt=media&token=55b284a6-f316-4624-9ffe-b5ff2b350724",
+            "precioDeVenta": 12.5,
+            "precioDeCompra": 10.82,
+            "peso": 7,
+            "nombre": "Cool Fresh Amarilla 350ml x 15und",
+            "stock": 8
+        },
+        "hOFHwjR6Qb4qXteIF3pe": {
+            "precioDeVenta": 21.62,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-17%2007%3A45%3A19.650168.jpg?alt=media&token=3fb3001f-ab9a-46ea-9313-815a684f5926",
+            "nombre": "COOL FRESH COLA 3000ML X 4 UND",
+            "precioDeCompra": 18.63,
+            "peso": 12,
+            "stock": 0
+        },
+        "hOwjW77Tf4f8g834Nicj": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A34%3A03.390253.jpg?alt=media&token=f5a8333d-1447-47e5-9aca-345bf7b2df68",
+            "nombre": "Agua Loa 7LT x 2und ",
+            "precioDeVenta": 13.12,
+            "precioDeCompra": 11.55,
+            "peso": 14,
+            "stock": 13
+        },
+        "hYbmAZJmfv7vWdnUW6qs": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1712755213649.jpg?alt=media&token=17c4238a-b9c0-483a-b2ce-e26780ecb4d5",
+            "peso": 7,
+            "precioDeVenta": 30,
+            "precioDeCompra": 25.2,
+            "nombre": "Kero Jugo Mix Piña, Mango y Camu Camu",
+            "stock": 0
+        },
+        "hks23cwHPKcMY8ERW6wG": {
+            "precioDeVenta": 17.5,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-29%2008%3A28%3A31.916778.jpg?alt=media&token=e31785f1-f39d-4631-a0bd-9d0719b16c75",
+            "nombre": "KRIS GREEN PUNCH 1500ML X 6UND",
+            "precioDeCompra": 14.88,
+            "peso": 9,
+            "stock": 0
+        },
+        "jcgzxIQeXv2Tuz6Klv3g": {
+            "nombre": "Generade Tropical 500ML x 12und",
+            "precioDeVenta": 20,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-15%2008%3A18%3A12.624869.jpg?alt=media&token=baf06883-04db-4411-9b7b-713c56063ed0",
+            "precioDeCompra": 16.8,
+            "peso": 6,
+            "stock": 0
+        },
+        "kmBMe4Xf0ZH5Q9H654E8": {
+            "nombre": "PAPAS QUESO Y CEBOLLA 135G-FAMILIAR",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-16%2017%3A13%3A24.008948.jpg?alt=media&token=df98f47d-cc33-4c51-85c0-69e6c769f20e",
+            "precioDeCompra": 5.67,
+            "peso": 0.135,
+            "precioDeVenta": 6.5,
+            "stock": 43
+        },
+        "l8gOINSRFdOtsvMLNnlv": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-05%2020%3A57%3A01.191306.jpg?alt=media&token=1bb9111f-b6de-4ca1-9d40-3e10ec33b77c",
+            "precioDeVenta": 12.5,
+            "nombre": "Cool Fresh Cola 350 ML X 15 unid",
+            "precioDeCompra": 10.82,
+            "peso": 7,
+            "stock": 9
+        },
+        "lA7UE2Dxih3fvlvDp6xw": {
+            "precioDeVenta": 20,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-09%2009%3A16%3A00.669656.jpg?alt=media&token=c753a368-d7c9-40e0-912a-804e2e320a68",
+            "nombre": "GENERADE SURTIDO-UVA,MORA,TROPICAL 500ML x12UND",
+            "precioDeCompra": 16.8,
+            "peso": 6,
+            "stock": 0
+        },
+        "lf66jCA6shzFEtguQbYX": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1711822091794.jpg?alt=media&token=14b48a59-66ce-4149-b709-06453aff4729",
+            "peso": 5.5,
+            "precioDeCompra": 11.34,
+            "nombre": "KR Cola 350 ml x 15 unid ",
+            "precioDeVenta": 12.5,
+            "stock": 3
+        },
+        "oEz0we9uaZgzbLwqgyXC": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2008%3A53%3A10.866430.jpg?alt=media&token=d0330622-d655-4d9b-a385-1536db0b0852",
+            "nombre": "KRIS DURAZNO 400ML X 15 UND",
+            "peso": 6,
+            "precioDeCompra": 10.62,
+            "precioDeVenta": 12.5,
+            "stock": 2
+        },
+        "oP6s3RjprVKMOKFXIRXn": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A18%3A51.016383.jpg?alt=media&token=6d265d68-ade1-4beb-9608-bfd254e511ed",
+            "precioDeVenta": 10,
+            "peso": 2.85,
+            "nombre": "Drink T Manzana y Pera 475 ML x 6 unid ",
+            "precioDeCompra": 8.25,
+            "stock": 0
+        },
+        "oTNCCxGNGMrRDwUVjThc": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A48%3A15.273897.jpg?alt=media&token=305f4336-c208-4e4b-8b1b-3996ce68a667",
+            "precioDeVenta": 12.5,
+            "nombre": "KRIS CITRUS PUNCH 350 ML X 15 UND ",
+            "peso": 10.62,
+            "precioDeCompra": 10.62,
+            "stock": 4
+        },
+        "pfcAcToS1CacqhEhveMU": {
+            "nombre": "PAPAS SAL DE MAR 135G-FAMILIAR",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-17%2010%3A41%3A13.957882.jpg?alt=media&token=42dcfb7b-a9b1-436a-96e5-db6b16468c62",
+            "precioDeCompra": 5.67,
+            "peso": 0.135,
+            "precioDeVenta": 6.5,
+            "stock": 78
+        },
+        "pzu9BMGjLV02iroDLG5j": {
+            "precioDeVenta": 22.5,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-13%2022%3A10%3A41.847190.jpg?alt=media&token=744e726f-c372-448d-87ae-c912e8e33973",
+            "nombre": "COOL FRESH COLA 2000ML X 6 UND",
+            "stock": 0,
+            "precioDeCompra": 19.35,
+            "peso": 12
+        },
+        "q5tkPRAW724Hz91dE7ot": {
+            "precioDeVenta": 20,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-15%2008%3A20%3A58.424724.jpg?alt=media&token=be1c5d61-3728-485a-8eb6-e4e11a7674fd",
+            "nombre": "KRIS FRUIT PUNCH 3000ML X 4 UND",
+            "precioDeCompra": 17,
+            "peso": 12,
+            "stock": 1
+        },
+        "quOLpSuFX3bf0OfBYl5h": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2007%3A03%3A44.305943.jpg?alt=media&token=5e6595e2-1294-438e-ab1e-89457a37cf44",
+            "peso": 6,
+            "precioDeVenta": 12.5,
+            "nombre": "KRIS RED PUNCH 350 ML X 15 UND",
+            "precioDeCompra": 10.62,
+            "stock": 38
+        },
+        "rNVWmeGawEHO3fZ25mnQ": {
+            "precioDeVenta": 10,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-13%2008%3A11%3A16.927864.jpg?alt=media&token=31e15cc0-2c84-41d5-9fff-57925132073f",
+            "nombre": "PAPAS QUESO Y CEBOLLA-TIRA X 6 UND 33g",
+            "peso": 0.18,
+            "precioDeCompra": 9.02,
+            "stock": 0
+        },
+        "sTi5AfCmIOmvphbUGZth": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1708036994792.jpg?alt=media&token=4cec3d1e-d97d-442e-82be-a40c7de745cf",
+            "precioDeVenta": 20,
+            "nombre": "Fruvi Surtido Mango, Durazno x 12",
+            "peso": 3.6,
+            "precioDeCompra": 3.6,
+            "stock": 0
+        },
+        "tDLvJyY1eDvP74ce6Wzy": {
+            "precioDeVenta": 12,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A27%3A13.914143.jpg?alt=media&token=99de16f7-cdb3-4aa0-9087-c473b5b5a54a",
+            "nombre": "Agua Loa 625ML x 15und",
+            "precioDeCompra": 10.3,
+            "peso": 9.375,
+            "stock": 8
+        },
+        "uW2tCoPRYKMA7lDwmGkw": {
+            "precioDeVenta": 30,
+            "nombre": "Kero Jugo Naranja, Piña y Camu Camu",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-12%2008%3A04%3A55.912422.jpg?alt=media&token=2c5711d7-4920-4774-8982-cfaa9095e416",
+            "precioDeCompra": 25.2,
+            "peso": 3.6,
+            "stock": 1
+        },
+        "ujUmxkXaKD0mkSm5bgxX": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A51%3A11.113528.jpg?alt=media&token=1088aae3-bb1a-4d99-9c1c-badf342e6b12",
+            "nombre": "Cool Fresh Piña 350 ML x 15 unid",
+            "peso": 7,
+            "precioDeVenta": 12.5,
+            "precioDeCompra": 10.82,
+            "stock": 1
+        },
+        "uorXLCm1bN72kT7qOMmr": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/productos%2F1712245430877.jpg?alt=media&token=d5ce1f1c-ce6b-4251-8ff9-d54b8758667b",
+            "peso": 5.5,
+            "precioDeVenta": 12.5,
+            "precioDeCompra": 11.34,
+            "nombre": "KR Piña 350 mi x 15 unid",
+            "stock": 7
+        },
+        "vT9aXEMpZb3UgGk4sfI1": {
+            "nombre": "Kero Aloe Piña",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-24%2018%3A46%3A42.330729.jpg?alt=media&token=29afbdcc-dd51-428e-bd8c-f086de476159",
+            "precioDeVenta": 30,
+            "peso": 3.6,
+            "precioDeCompra": 25.2,
+            "stock": 3
+        },
+        "vkO1w6ba5TmbmzNOiMVj": {
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-11-06%2006%3A53%3A10.675255.jpg?alt=media&token=444828bd-e35d-45c7-8189-dd4e8102f9ac",
+            "peso": 11.6,
+            "precioDeVenta": 12.5,
+            "nombre": "Kris Green Punch 350ml x 15 und",
+            "precioDeCompra": 10.62,
+            "stock": 47
+        },
+        "vmc5bpRZMX9MHEtH9Lwx": {
+            "precioDeVenta": 30,
+            "nombre": "kero Jugo Mango, Maracuyá y Camu Camu",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-12%2008%3A02%3A26.311951.jpg?alt=media&token=9a0ab6f3-9742-4ba9-ad7c-8da81e1544d6",
+            "precioDeCompra": 25.2,
+            "peso": 3.6,
+            "stock": 2
+        },
+        "yZAhfBRqdNNaBq4hvUdT": {
+            "precioDeVenta": 15,
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-10-25%2020%3A29%3A55.857853.jpg?alt=media&token=9b883225-cfca-418f-9a63-d797532a6eb0",
+            "nombre": "Agua Loa 2.5LT x 6und",
+            "precioDeCompra": 12.9,
+            "peso": 15,
+            "stock": 0
+        },
+        "zBXCO82xMpGS0of7fJ3Y": {
+            "precioDeVenta": 20,
+            "nombre": "360 Gamer x 12 unid",
+            "imagen": "https://firebasestorage.googleapis.com/v0/b/ristos-7ad7f.appspot.com/o/product_images%2F2023-12-12%2007%3A59%3A33.210880.jpg?alt=media&token=bf7c3db3-ff3d-4a67-a1a1-4e568dd81068",
+            "precioDeCompra": 17,
+            "peso": 3.6,
+            "stock": 1
+        }
+    }
+}

@@ -1,18 +1,22 @@
-const Modal = ({isAbierto, onCerrado, children}) => {
-    if (!isAbierto) return null;
+// Modal.js
+"use client";
 
-    return (
-        <div className="items-center z-50 fixed inset-0 bg-gray-400 bg-opacity-50 flex justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
-            <div className="flex justify-between items-center">
-             <h2 className="text-2xl text-bold">Titulo</h2>   
-             <button onClick={onCerrado} className="text-gray-700 font-bold">X</button> 
-            </div>
-            <div className="mt-4">
-             {children}
-            </div>
-          </div>
-        </div>
-    )
+import React from 'react';
+
+export default function Modal({ visible, mensaje, onClose }) {
+  if (!visible) return null; // No renderizar si no está visible
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose}></div>
+      <div className="bg-white p-8 rounded-lg shadow-lg z-10">
+        <p>{mensaje}</p>
+        <button 
+          onClick={onClose} 
+          className="mt-4 bg-blue-500 text-white p-2 rounded-lg">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  );
 }
-export default Modal;
