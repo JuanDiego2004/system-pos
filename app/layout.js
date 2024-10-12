@@ -1,8 +1,8 @@
-
+"use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
-
+import { AuthProvider } from "./context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +15,9 @@ export default function Layout({ children }) {
        <div className="flex">
         <Sidebar />
         <div className="flex-1 p-4">
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </div>
        </div>
        

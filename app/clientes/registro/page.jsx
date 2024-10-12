@@ -143,6 +143,17 @@ export default function Registro() {
     setError("");
   };
 
+  const handleRowClick = (row) => {
+    setCliente({
+      tipoDocumento: row.tipoDocumento,
+      codigoCliente: row.codigoCliente,
+      lugar: row.lugar,
+      direccion: row.direccion,
+      numeroDocumento: row.numeroDocumento,
+      nombre: row.nombre,
+    });
+    setModalEstaAbierto(true);
+  };
   return (
     <div className="container bg-grayCustom mx-auto p-4 h-screen rounded-xl">
       <h1 className="text-2xl font-bold mb-4">Registro de Cliente</h1>
@@ -309,7 +320,7 @@ export default function Registro() {
       )}
 
       {datos.length > 0 ? (
-        <StickyTable columns={columns} data={datos} />
+        <StickyTable columns={columns} data={datos} onRowClick={handleRowClick} />
       ) : (
         <p>No hay resultados para la búsqueda.</p>
       )}

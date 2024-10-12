@@ -1,23 +1,31 @@
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  directUrl         = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
+enum Categoria {
+  agua
+  gaseosas
+  frugos
+  papas
+  Otros
+}
 
 model Producto {
-  id              String @id @default(cuid())
-  imagen          String
-  nombre          String
-  precioVenta     Float
-  peso            Float
-  precioCompra    Float
-  stock           Int
-  categoria       String
+  id             String          @id @default(cuid())
+  imagen         String
+  nombre         String
+  precioVenta    Float
+  peso           Float
+  precioCompra   Float
+  stock          Int
+  categoria      Categoria       @default(Otros) // Valor por defecto añadido
+  ventaProductos VentaProducto[] // Relación inversa con VentaProducto
+  Bonificacion   Bonificacion[]
 }
 
 model Cliente {
@@ -29,4 +37,55 @@ model Cliente {
   numeroDocumento String   @unique
   nombre          String
   createdAt       DateTime @default(now()) // Fecha de creación
+  ventas          Venta[] // Relación inversa con Venta
+}
+
+model Venta {
+  id          String          @id @default(uuid())
+  cliente     Cliente         @relation(fields: [clienteId], references: [id])
+  clienteId   String
+  productos   VentaProducto[] // Relación con VentaProducto
+  total       Float
+  utilidad    Float
+  fecha       DateTime        @default(now())
+  usuario     Usuario?        @relation(fields: [usuarioId], references: [id]) // Relación opcional
+  usuarioId   String? // Hacerlo opcional
+  serie       Serie?          @relation(fields: [serieId], references: [id]) // Nueva relación con Serie
+  serieId     String? // Campo para almacenar el id de la serie
+  serieNumero String // Nuevo campo para almacenar la serie con número
+}
+
+model VentaProducto {
+  id           String   @id @default(uuid())
+  venta        Venta    @relation(fields: [ventaId], references: [id])
+  ventaId      String
+  producto     Producto @relation(fields: [productoId], references: [id])
+  productoId   String
+  cantidad     Int
+  precioVenta  Float
+  precioCompra Float    @default(0) // Valor por defecto
+}
+
+model Usuario {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ventas    Venta[] // Agregar esta línea para crear la relación inversa
+}
+
+model Serie {
+  id       String  @id @default(uuid())
+  tipo     String // "factura" o "boleta"
+  serie    String // Ejemplo: "F001", "B001"
+  contador Int     @default(1) // Contador para las series
+  ventas   Venta[] // Relación con las ventas
+}
+
+model Bonificacion {
+  id         String   @id @default(cuid())
+  producto   Producto @relation(fields: [productoId], references: [id])
+  productoId String
+  createdAt  DateTime @default(now())
 }

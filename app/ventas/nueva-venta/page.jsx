@@ -6,38 +6,39 @@ import imageKr from "@/app/assets/kr.png";
 import Delete from "@/app/assets/delete.png";
 import TipoDeBaucher from "@/app/components/botonDropdown";
 import TextFieldButton from "@/app/components/textFieldButton";
+import loader from "@/app/assets/1494.gif";
 
 export default function NuevaVenta() {
   const [productos, setProductos] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
   const [busqueda, setBusqueda] = useState("");
-  const categorias = ["Todos", "agua", "gaseosas", "frugos", "papas"];
   //estado para pasar el producto seleccionado
   const [productoSeleccionado, setProductoSeleccionado] = useState([]);
   //modal
   const [modalVisible, setModalVisible] = useState(false);
   const [productoEnModal, setProductoEnModal] = useState(null);
+  const [tipoSeleccionado, setTipoSeleccionado] = useState("Tipo de vaucher");
+  const categorias = ["Todos", "agua", "gaseosas", "frugos", "papas"];
+  const [cargando, setCargando] = useState(false);
 
-
-
-    //--------------------------------Función para obtener los productos desde el endpoint----------------------
-    const obtenerProductos = async () => {
-      try {
-        const response = await fetch("/api/productos"); // Cambia la URL según tu endpoint
-        if (!response.ok) {
-          throw new Error("Error al obtener los productos");
-        }
-        const data = await response.json();
-        setProductos(data);
-      } catch (error) {
-        console.error("Error al obtener los productos:", error);
+  //--------------------------------Función para obtener los productos desde el endpoint----------------------
+  const obtenerProductos = async () => {
+    try {
+      const response = await fetch("/api/productos"); // Cambia la URL según tu endpoint
+      if (!response.ok) {
+        throw new Error("Error al obtener los productos");
       }
-    };
-  
-    useEffect(() => {
-      obtenerProductos(); // Llamar a la función al montar el componente
-    }, []);
-    
+      const data = await response.json();
+      setProductos(data);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+    }
+  };
+
+  useEffect(() => {
+    obtenerProductos(); // Llamar a la función al montar el componente
+  }, []);
+
   // funcion patra filtrar productos
   const filtroProductos = productos.filter((producto) => {
     const buscarCoincidencias = producto.nombre
@@ -129,13 +130,12 @@ export default function NuevaVenta() {
     }, 0);
   };
 
-
   //------------------------------ FUNCIONES PARA REALIZAR VENTAS---------------------------------
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
   const [busquedaCliente, setBusquedaCliente] = useState("");
-const [clientesFiltrados, setClientesFiltrados] = useState([]);
+  const [clientesFiltrados, setClientesFiltrados] = useState([]);
 
-// Función para buscar clientes
+  // Función para buscar clientes
 const buscarClientes = async () => {
   if (!busquedaCliente) {
     setClientesFiltrados([]); // Limpiar si no hay búsqueda
@@ -145,57 +145,103 @@ const buscarClientes = async () => {
   try {
     const response = await fetch(`/api/clientes?nombre=${busquedaCliente}`);
     const data = await response.json();
-    setClientesFiltrados(data); // Asumiendo que la respuesta es un array de clientes
+    // Filtrar los clientes según el nombre
+    const clientesFiltrados = data.filter((cliente) =>
+      cliente.nombre.toLowerCase().includes(busquedaCliente.toLowerCase())
+    );
+    setClientesFiltrados(clientesFiltrados);
   } catch (error) {
     console.error("Error al buscar clientes:", error);
   }
 };
+  
+  
+  // Ejecutar la búsqueda cada vez que cambie el input de búsqueda
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      buscarClientes();
+    }, 300); // Añade un pequeño retraso para evitar demasiadas llamadas a la API
 
-// Función para manejar la selección de cliente
-const manejarSeleccionCliente = (cliente) => {
-  setClienteSeleccionado(cliente);
-  setBusquedaCliente(""); // Limpiar el input
-  setClientesFiltrados([]); // Ocultar la lista de clientes filtrados
-};
+    return () => clearTimeout(delayDebounceFn);
+  }, [busquedaCliente]);
 
-const realizarVenta = async () => {
-  if (!clienteSeleccionado) {
-    alert("Por favor, selecciona un cliente antes de realizar la venta.");
-    return;
-  }
+  // Función para manejar la selección de cliente
+  const manejarSeleccionCliente = (cliente) => {
+    setClienteSeleccionado(cliente);
+    setBusquedaCliente(cliente.nombre);
+    setClientesFiltrados([]);
+  };
 
-  try {
-    const response = await fetch("/api/ventas", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        cliente: clienteSeleccionado,
-        productos: productosSeleccionados,
-      }),
-    });
+  const limpiarSeleccion = () => {
+    setClienteSeleccionado(null);
 
-    if (!response.ok) {
-      throw new Error("Error al realizar la venta");
+    setBusquedaCliente("");
+  };
+
+  const realizarVenta = async () => {
+    if (tipoSeleccionado === "Tipo de vaucher") {
+      alert(
+        "Por favor, selecciona un tipo de vaucher antes de realizar la venta."
+      );
+
+      return;
     }
 
-    const data = await response.json();
-    console.log("Venta realizada con éxito:", data);
-    // Restablecer los estados si es necesario
-    setProductosSeleccionados([]);
-    setClienteSeleccionado(null);
-    setBusquedaCliente("");
-    setClientesFiltrados([]);
-  } catch (error) {
-    console.error("Error al realizar la venta:", error);
-  }
-};
 
 
+    console.log("Cliente seleccionado:", clienteSeleccionado);
+    if (!clienteSeleccionado) {
+      alert("Por favor, selecciona un cliente antes de realizar la venta.");
+      return;
+    }
+    console.log("Productos seleccionados:", productoSeleccionado);
+    console.log("Tipo de venta seleccionado:", tipoSeleccionado);
 
+    const total = calcularTotal();
+
+    setCargando(true);
+
+    try {
+      const response = await fetch("/api/ventas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cliente: { id: clienteSeleccionado.id }, // Enviar 'cliente' como objeto
+          productos: productoSeleccionado.map((producto) => ({
+            id: producto.id, // Usar 'id' en lugar de 'productoId'
+            cantidad: producto.cantidad,
+            precioVenta: producto.precioVenta,
+            // No enviar 'precioCompra' ya que el servidor lo obtiene
+          })),
+          total: total,
+          tipoVenta: tipoSeleccionado,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error al realizar la venta");
+      }
+
+      const data = await response.json();
+      console.log("Venta realizada con éxito:", data);
+      // Restablecer los estados si es necesario
+      setProductoSeleccionado([]);
+      setClienteSeleccionado(null);
+      setBusquedaCliente("");
+      setClientesFiltrados([]);
+    } catch (error) {
+      console.error("Error al realizar la venta:", error);
+      alert(`Error: ${error.message}`);
+    } finally {
+      setCargando(false);
+    }
+  };
 
   return (
+    
     <div className="w-full h-screen bg-grayCustom flex justify-between items-center p-4">
       <div className="w-3/5 h-full">
         {/* seccion cataegorias y busqueda */}
@@ -250,6 +296,7 @@ const realizarVenta = async () => {
                       <img
                         src={producto.imagen}
                         className="w-full h-full rounded-lg"
+                        alt="Eliminar producto"
                       />
                     </div>
                     <div className="w-5/6 h-full relative mt-2">
@@ -282,49 +329,88 @@ const realizarVenta = async () => {
         <div className="p-4 w-full h-22 border-b">
           <p className="kanit-semibold text-lg ">Lista de Productos</p>
         </div>
-          <div>
-    <h2>Buscar Cliente</h2>
-    <input
-      type="text"
-      placeholder="Buscar cliente"
-      value={busquedaCliente}
-      onChange={(e) => {
-        setBusquedaCliente(e.target.value);
-        buscarClientes(); // Buscar clientes cuando el input cambia
-      }}
-      onFocus={() => buscarClientes()} // Llamar a la función al enfocar el input
-    />
-    {busquedaCliente && clientesFiltrados.length > 0 && (
-      <ul className="absolute z-10 bg-white border border-gray-300 rounded-md shadow-lg">
-        {clientesFiltrados.map((cliente) => (
-          <li
-            key={cliente.id}
-            onClick={() => manejarSeleccionCliente(cliente)} // Cambiar a esta función
-            className="cursor-pointer hover:bg-gray-200 p-2"
-          >
-            {cliente.nombre}
-          </li>
-        ))}
-      </ul>
-    )}
-    {clienteSeleccionado && (
-      <div>
-        <h3>Cliente Seleccionado: {clienteSeleccionado.nombre}</h3>
-      </div>
-    )}
+        <div className="p-4 relative">
+          <div className="relative">
+            <input
+              type="text"
+              className="w-full p-4 pl-10 text-sm text-gray-700 rounded-lg shadow-md focus:ring-1 focus:ring-orange-500 focus:border-orange-500"
+              placeholder="Buscar cliente"
+              value={busquedaCliente}
+              onChange={(e) => {
+                setBusquedaCliente(e.target.value);
+
+                buscarClientes();
+              }}
+              onFocus={() => buscarClientes()}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute top-4 left-4 h-5 w-5 text-gray-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              />
+            </svg>
+            {clienteSeleccionado && (
+              <button
+                onClick={limpiarSeleccion}
+                className="absolute right-2 top-2 text-gray-500"
+              >
+                X
+              </button>
+            )}
+
+{busquedaCliente && clientesFiltrados.length > 0 && (
+  <div className="absolute z-20 w-full max-w-lg mt-2 bg-white border border-gray-200 rounded-xl shadow-lg">
+    <ul className="max-h-60 overflow-y-auto p-2 transition-all duration-500 ease-in-out">
+      {clientesFiltrados.map((cliente) => (
+        <li
+          key={cliente.id}
+          onClick={() => manejarSeleccionCliente(cliente)}
+          className="flex items-center gap-4 cursor-pointer p-3 rounded-lg hover:bg-blue-100 hover:shadow-md transition-colors duration-200 ease-in-out"
+        >
+          <div className="bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center">
+            {cliente.nombre.charAt(0).toUpperCase()}
+          </div>
+          <span className="font-medium text-gray-700">{cliente.nombre}</span>
+        </li>
+      ))}
+    </ul>
   </div>
+)}
+
+          </div>
+          {busquedaCliente && clientesFiltrados.length > 0 && (
+            <ul className="absolute z-10 bg-white border border-gray-300 rounded-md shadow-lg">
+              {clientesFiltrados.map((cliente) => (
+                <li
+                  key={cliente.id}
+                  onClick={() => manejarSeleccionCliente(cliente)} // Cambiar a esta función
+                  className="cursor-pointer hover:bg-gray-200 p-2"
+                >
+                  {cliente.nombre}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         {/* Contenedor con scroll y alto fijo de 500px */}
-        <div className="h-3/4 bg-grayCustom overflow-y-auto p-3">
+        <div className="h-3/5 bg-white overflow-y-auto p-3">
           {productoSeleccionado.map((producto) => (
             <div
               key={producto.id}
-              className="w-11/12 h-28 flex rounded-lg bg-white mb-2"
+              className="w-11/12 h-28 flex rounded-lg bg-grayCustom mb-2"
             >
               <div className="w-2/5 h-full rounded-lg ">
                 <img
                   className="w-full h-full rounded-lg"
                   src={producto.imagen}
+                  alt="Eliminar producto"
                 />
               </div>
               <div className="p-2">
@@ -358,6 +444,7 @@ const realizarVenta = async () => {
                       src={Delete.src}
                       onClick={() => eliminarProductoPorId(producto.id)}
                       className="w-9 h-9"
+                      alt="Eliminar producto"
                     />
                   </div>
                 </div>
@@ -368,34 +455,53 @@ const realizarVenta = async () => {
         </div>
 
         {/* Otro div debajo del contenedor con scroll */}
-        <div className=" p-4 h-1/6 bg-white  text-white rounded-lg">
-          <div className="mt-3 flex justify-between items-center w-full">
-            <p className="kanit-semibold text-[] text-black">Informacion:</p>
-            <TipoDeBaucher />
-          </div>
-          <div className="mt-2 border-b-2"></div>
+        <div className="flex items-center justify-center">
+          <div className="p-3 h-1/6 w-11/12 bg-gray-100  text-white rounded-lg">
+            <div className="mt-3 flex justify-between items-center w-full">
+              <p className="kanit-semibold text-[] text-black">Informacion:</p>
+              <div className="flex flex-col">
+                <select
+                  value={tipoSeleccionado}
+                  onChange={(e) => setTipoSeleccionado(e.target.value)}
+                  className="w-full p-2 border rounded-lg text-black"
+                >
+                  <option value="Tipo de vaucher">Tipo de vaucher</option>
 
-          <div className="flex mt-1 justify-between items-center w-full">
-            <p className="font-roboto-condensed font-bold text-sm text-black">
-              TOTAL:
-            </p>
-            <p className="font-roboto-condensed font-bold  text-black">
-              ${calcularTotal().toFixed(2)}
-            </p>
-          </div>
-          <div className="flex justify-between items-center w-full">
-            <p className="font-roboto-condensed font-bold -sm text-black">
-              UTILIDAD:
-            </p>
-            <p className="font-roboto-condensed font-bold  text-black">
-              ${calcularUtilidad().toFixed(2)}
-            </p>
-          </div>
-          <div className="w-full h-14 flex justify-between ">
-            
-            <button className="bg-black w-full p-2  text-white rounded-lg">
-              Realizar Venta
-            </button>
+                  <option value="Boleta">Boleta</option>
+
+                  <option value="Factura">Factura</option>
+                </select>
+              </div>
+            </div>
+            <div className="mt-2 border-b-2"></div>
+
+            <div className="flex mt-1 justify-between items-center w-full">
+              <p className="font-roboto-condensed font-bold text-sm text-black">
+                TOTAL:
+              </p>
+              <p className="font-roboto-condensed font-bold  text-black">
+                ${calcularTotal().toFixed(2)}
+              </p>
+            </div>
+            <div className="flex justify-between items-center w-full">
+              <p className="font-roboto-condensed font-bold -sm text-black">
+                UTILIDAD:
+              </p>
+              <p className="font-roboto-condensed font-bold  text-black">
+                ${calcularUtilidad().toFixed(2)}
+              </p>
+            </div>
+            <div className="w-full h-14 flex justify-between ">
+              <div className="w-full h-14 flex justify-between ">
+                <button
+                  onClick={realizarVenta}
+                  className="bg-black w-full p-2  text-white rounded-lg"
+                  disabled={cargando}
+                >
+                  {cargando ? "Realizando venta..." : "Realizar Venta"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

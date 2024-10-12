@@ -6,6 +6,10 @@ export default function TipoDeBaucher() {
 
   const opciones = ['Boleta', 'Factura'];
 
+  
+
+
+
   const manejarOpcionSeleccionada = (opcion) => {
     setTipoSeleccionado(opcion);
     setIsOpen(false);

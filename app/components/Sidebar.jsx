@@ -18,7 +18,7 @@ const MenuItems = [
         icon: FaBox,
         submenu: [
             { name: "Nueva Venta", path: "/ventas/nueva-venta" },
-            { name: "Historial", path: "/ventas/historial" },
+            { name: "Historial", path: "/ventas/historial-venta" },
             { name: "Factura e Emision", path: "/ventas/factura" },
             { name: "Devoluciones y anulaciones", path: "/ventas/devoluciones" },
         ] 
@@ -74,7 +74,7 @@ const Sidebar = () => {
         <div className="relative h-screen w-16 bg-white text-black flex flex-col border-r-4 border-gray-300 overflow-hidden transition-all duration-300 ease-in-out hover:w-52 group z-50">
             {/* header */}
             <div className="p-4 flex items-center justify-between">
-                <img src={logo} className="w-12" />
+                <img src={logo} className="w-12" alt="Logo" />
                 <div className="w-2.5"></div>
                 <div className="flex flex-col justify-center items-center ml-4 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">
                     <h2 className="text-sm font-bold">INVERSIONES RISTOS E.I.RL</h2>

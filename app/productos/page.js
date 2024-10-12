@@ -10,6 +10,7 @@ import BarraEstadistico from "../components/BarraEstadistico";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import StickyTable from "../components/stickyHeader";
+import Modal from "../components/Modal";
 
 export default function Productos() {
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
@@ -235,6 +236,63 @@ export default function Productos() {
     precioVenta: 0,
    // categoria: "",
   });
+
+  // Nuevo estado para productos bonificados
+const [productosBonificados, setProductosBonificados] = useState([]);
+const [modalOpen, setModalOpen] = useState(false);
+const [modalMessage, setModalMessage] = useState("");
+
+
+
+// Función para manejar el cambio del checkbox
+const handleCheckboxChange = async (e) => {
+  if (!productoSeleccionado) return; // Asegúrate de que productoSeleccionado no sea null
+
+  try {
+    if (e.target.checked) {
+      const response = await fetch("/api/productos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productoId: productoSeleccionado.id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al agregar bonificación");
+      }
+
+      const newBonificacion = await response.json();
+      setProductosBonificados((prev) => [...prev, productoSeleccionado]);
+      setModalMessage("El producto ha sido bonificado.");
+      setModalOpen(true);
+    }else {
+      const response = await fetch("/api/productos", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productoId: productoSeleccionado.id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar bonificación");
+      }
+
+      setProductosBonificados((prev) => prev.filter((p) => p.id !== productoSeleccionado.id));
+      setModalMessage("El producto ha sido eliminado de las bonificaciones.");
+      setModalOpen(true);
+    }
+  
+  } catch (error) {
+    console.error("Error al manejar la bonificación:", error);
+    setModalMessage("Hubo un error al procesar la bonificación.");
+    setModalOpen(true);
+  }
+};
+
+
+
   
 
   return (
@@ -450,6 +508,16 @@ export default function Productos() {
                 </h5>
                 <div className="flex justify-between items-center gap-3">
                   <div className="space-y-2 w-9/12">
+                  <div className="flex items-center">
+  <input
+    type="checkbox"
+    id="bonificar-checkbox"
+    onChange={handleCheckboxChange}
+    checked={productoSeleccionado && productosBonificados.some(p => p.id === productoSeleccionado.id)}
+  />
+  <label htmlFor="bonificar-checkbox" className="ml-2 text-gray-800">Permitir bonificar producto</label>
+</div>
+
                     <div className="flex justify-between">
                       <span className="montserrat-dos text-gray-500 ">
                         Precio Venta:
@@ -505,10 +573,13 @@ export default function Productos() {
                   </div>
                   <div className="w-4/12 h-36  rounded-md">
                     <img
+                    alt="juan"
                       className="w-full h-full rounded-lg"
                       src={productoSeleccionado.imagen}
                     />
                   </div>
+                   {/* Modal */}
+    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} message={modalMessage} />
                 </div>
                 {/* Barra estadiustico */}
                 <div id="chart" className="mt-24">
@@ -530,3 +601,4 @@ export default function Productos() {
     </div>
   );
 }
+
