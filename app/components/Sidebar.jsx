@@ -5,9 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import '@fontsource-variable/roboto-condensed';
 import '@fontsource/fira-sans';
+import { TbShoppingCartBolt } from "react-icons/tb";
 import { TiHomeOutline } from "react-icons/ti";
-import { FaBox, FaWarehouse, FaCashRegister,FaChevronDown, FaChevronUp } from "react-icons/fa";
-
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { FiUsers } from "react-icons/fi";
+import { AiTwotoneCar } from "react-icons/ai";
+import { BiError } from "react-icons/bi";
+import { IoMdArrowRoundForward , IoMdArrowRoundBack} from "react-icons/io";
 
 
 const MenuItems = [
@@ -15,7 +19,7 @@ const MenuItems = [
     { 
         name: "Ventas",
         path: "/ventas",
-        icon: FaBox,
+        icon: TbShoppingCartBolt ,
         submenu: [
             { name: "Nueva Venta", path: "/ventas/nueva-venta" },
             { name: "Historial", path: "/ventas/historial-venta" },
@@ -23,11 +27,11 @@ const MenuItems = [
             { name: "Devoluciones y anulaciones", path: "/ventas/devoluciones" },
         ] 
     },
-    { name: "Inventario", path: "/productos", icon: FaWarehouse },
+    { name: "Inventario", path: "/productos", icon: MdProductionQuantityLimits},
     {
          name: "Clientes", 
          path: "/clientes", 
-         icon: FaCashRegister,
+         icon: FiUsers,
          submenu: [
             { name: "Registro", path: "/clientes/registro" },
             { name: "Historial Compras", path: "/clientes/historial" },
@@ -38,18 +42,18 @@ const MenuItems = [
     {
         name: "Proveedores", 
         path: "/proveedores", 
-        icon: FaCashRegister,
+        icon: AiTwotoneCar,
         submenu: [
            { name: "Registro", path: "/proveedores/registro" },
            { name: "Historial Compras", path: "/proveedores/historial" },
-           { name: "Ordenes de compras", path: "/clientes/compras" },
+           { name: "Ordenes de compras", path: "/proveedores/compras" },
            { name: "Cunetas por cobrar", path: "/clientes/cuentas" },
         ]
     },
     {
         name: "Reportes", 
         path: "/reportes", 
-        icon: FaCashRegister,
+        icon: BiError,
         submenu: [
            { name: "Ventas por periodo", path: "/proveedores/registro" },
            { name: "Mas vendidos", path: "/proveedores/historial" },
@@ -57,8 +61,7 @@ const MenuItems = [
            { name: "Rentabilidad", path: "/clientes/cuentas" },
         ]
     },
-    { name: "Configuracion", path: "/", icon: TiHomeOutline },
-    { name: "Cierre de caja", path: "/", icon: TiHomeOutline }, 
+   
 ];
 
 const Sidebar = () => {
@@ -77,7 +80,7 @@ const Sidebar = () => {
                 <img src={logo} className="w-12" alt="Logo" />
                 <div className="w-2.5"></div>
                 <div className="flex flex-col justify-center items-center ml-4 transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">
-                    <h2 className="text-sm font-bold">INVERSIONES RISTOS E.I.RL</h2>
+                    <h2 className="text-sm font-bold text-blue-700">INVERSIONES RISTOS E.I.R.L</h2>
                     <p className="text-xs">La lealtad tiene su recompensa</p>
                 </div>
             </div>
@@ -94,8 +97,8 @@ const Sidebar = () => {
                             return (
                                 <li key={index}>
                                     <div
-                                        className={`px-4 py-2 hover:bg-green-300 hover:rounded-lg fira-sans flex items-center justify-between ${
-                                            isActive ? 'bg-green-500 rounded-lg' : ''
+                                        className={`px-4 py-2 hover:bg-blue-500 hover:text-white hover:rounded-lg fira-sans flex items-center justify-between ${
+                                            isActive ? 'bg-blue-700 rounded-lg' : ''
                                         }`}
                                     >
                                         <Link
@@ -104,8 +107,8 @@ const Sidebar = () => {
                                                 isActive ? 'text-white' : ''
                                             }`}
                                         >
-                                            <Icon className="text-xl" />
-                                            <span className="ml-2 text-xs group-hover:inline-block hidden transition-opacity duration-300 ease-in-out">
+                                            <Icon className="text-2xl" />
+                                            <span className="ml-2 text-sm group-hover:inline-block hidden transition-opacity duration-300 ease-in-out">
                                                 {item.name}
                                             </span>
                                         </Link>
@@ -114,14 +117,14 @@ const Sidebar = () => {
                                                 onClick={() => handleToggleMenu(index)}
                                                 className="text-xs focus:outline-none"
                                             >
-                                                {isMenuOpen ? <FaChevronUp /> : <FaChevronDown />}
+                                                {isMenuOpen ? <IoMdArrowRoundForward/> : <IoMdArrowRoundBack />}
                                             </button>
                                         )}
                                     </div>
                                     {isMenuOpen && item.submenu && (
                                         <ul className="ml-6 mt-2">
                                             {item.submenu.map((subitem, subindex) => (
-                                                <li key={subindex} className="px-4 py-1 hover:bg-green-200 hover:rounded-lg">
+                                                <li key={subindex} className="px-4 py-1 hover:bg-blue-500 hover:text-white hover:rounded-md">
                                                     <Link
                                                         href={subitem.path}
                                                         className="text-xs block"

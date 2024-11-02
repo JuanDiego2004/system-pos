@@ -30,12 +30,17 @@ export async function GET(request) {
 
     // Consulta a la base de datos con Prisma
     const ventas = await prisma.venta.findMany({
-      where, // Mover 'where' al mismo nivel que 'include'
+      where,
       include: {
         cliente: true,
         productos: {
           include: {
             producto: true, // Incluye los detalles del producto
+          },
+        },
+        serie: {
+          select: {
+            tipo: true,
           },
         },
       },
@@ -61,3 +66,6 @@ export async function GET(request) {
     );
   }
 }
+
+
+

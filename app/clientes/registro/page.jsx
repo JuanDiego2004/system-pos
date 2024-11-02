@@ -80,7 +80,7 @@ export default function Registro() {
           throw new Error(errorData.mensaje || "Error al obtener clientes");
         }
         const datos = await respuesta.json();
-        setListaClientes(datos);
+        listaClientes(datos);
       } catch (error) {
         console.error("Error:", error);
         setError(error.message);

@@ -16,16 +16,19 @@ enum Categoria {
 }
 
 model Producto {
-  id             String          @id @default(cuid())
+  id             String           @id @default(cuid())
   imagen         String
   nombre         String
   precioVenta    Float
   peso           Float
   precioCompra   Float
   stock          Int
-  categoria      Categoria       @default(Otros) // Valor por defecto añadido
+  categoria      Categoria        @default(Otros) // Valor por defecto añadido
   ventaProductos VentaProducto[] // Relación inversa con VentaProducto
   Bonificacion   Bonificacion[]
+  Proveedor      Proveedor?       @relation(fields: [proveedorId], references: [id])
+  proveedorId    String?
+  CompraProducto CompraProducto[]
 }
 
 model Cliente {
@@ -41,18 +44,19 @@ model Cliente {
 }
 
 model Venta {
-  id          String          @id @default(uuid())
-  cliente     Cliente         @relation(fields: [clienteId], references: [id])
-  clienteId   String
-  productos   VentaProducto[] // Relación con VentaProducto
-  total       Float
-  utilidad    Float
-  fecha       DateTime        @default(now())
-  usuario     Usuario?        @relation(fields: [usuarioId], references: [id]) // Relación opcional
-  usuarioId   String? // Hacerlo opcional
-  serie       Serie?          @relation(fields: [serieId], references: [id]) // Nueva relación con Serie
-  serieId     String? // Campo para almacenar el id de la serie
-  serieNumero String // Nuevo campo para almacenar la serie con número
+  id             String          @id @default(uuid())
+  cliente        Cliente         @relation(fields: [clienteId], references: [id])
+  clienteId      String
+  productos      VentaProducto[] // Relación con VentaProducto
+  total          Float
+  utilidad       Float
+  fecha          DateTime        @default(now())
+  usuario        Usuario?        @relation(fields: [usuarioId], references: [id]) // Relación opcional
+  usuarioId      String? // Hacerlo opcional
+  serie          Serie?          @relation(fields: [serieId], references: [id]) // Nueva relación con Serie
+  serieId        String? // Campo para almacenar el id de la serie
+  serieNumero    String // Nuevo campo para almacenar la serie con número
+  bonificaciones Bonificacion[]
 }
 
 model VentaProducto {
@@ -73,6 +77,7 @@ model Usuario {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ventas    Venta[] // Agregar esta línea para crear la relación inversa
+  Compra    Compra[]
 }
 
 model Serie {
@@ -87,5 +92,41 @@ model Bonificacion {
   id         String   @id @default(cuid())
   producto   Producto @relation(fields: [productoId], references: [id])
   productoId String
+  cantidad   Int      @default(1)
   createdAt  DateTime @default(now())
+  venta      Venta?   @relation(fields: [ventaId], references: [id]) // Agregar relación con Venta
+  ventaId    String? // Hacer referencia a la ID de la venta
+}
+
+model Proveedor {
+  id        String     @id @default(uuid())
+  nombre    String
+  ruc       String     @unique
+  direccion String
+  telefono  String?
+  email     String?
+  productos Producto[] // Relación con productos
+  createdAt DateTime   @default(now())
+  Compra    Compra[]
+}
+
+model Compra {
+  id          String           @id @default(uuid())
+  proveedor   Proveedor        @relation(fields: [proveedorId], references: [id])
+  proveedorId String
+  productos   CompraProducto[] // Relación con CompraProducto
+  total       Float
+  fecha       DateTime         @default(now())
+  usuario     Usuario?         @relation(fields: [usuarioId], references: [id]) // Relación opcional con Usuario
+  usuarioId   String?
+}
+
+model CompraProducto {
+  id           String   @id @default(uuid())
+  compra       Compra   @relation(fields: [compraId], references: [id])
+  compraId     String
+  producto     Producto @relation(fields: [productoId], references: [id])
+  productoId   String
+  cantidad     Int
+  precioCompra Float
 }

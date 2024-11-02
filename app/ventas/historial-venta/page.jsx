@@ -8,41 +8,62 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css
 
+// Componente Modal para mostrar los detalles de la venta
+function VentaModal({ venta, onClose }) {
+  if (!venta) return null;
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg w-96">
+        <h2 className="text-xl font-semibold mb-4">Detalles de la Venta</h2>
+        <p><strong>Cliente:</strong> {venta.cliente.nombre}</p>
+        <p><strong>Fecha:</strong> {new Date(venta.fecha).toLocaleDateString()}</p>
+        <p><strong>Total:</strong> {venta.total.toFixed(2)}</p>
+        <p><strong>Tipo de Venta:</strong> {venta.serie ? venta.serie.tipo : "N/A"}</p>
+        <p><strong>Productos:</strong></p>
+        <ul>
+          {venta.productos.map((producto, index) => (
+            <li key={index}>
+              {producto.producto.nombre} - Cantidad: {producto.cantidad} - Precio: {producto.precioVenta.toFixed(2)}
+            </li>
+          ))}
+        </ul>
+        <button onClick={onClose} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Historial() {
   const [ventas, setVentas] = useState([]);
   const [error, setError] = useState(null);
   const [cargando, setCargando] = useState(true);
-  const [startDate, setStartDate] = useState(null); // Inicializado como null
-  const [endDate, setEndDate] = useState(null); // Inicializado como null
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [mostrarCalendario, setMostrarCalendario] = useState(false);
+  const [ventaSeleccionada, setVentaSeleccionada] = useState(null);
 
-  // Función para ajustar las fechas al inicio y fin del día
   const ajustarFechasInicioYFin = (startDate, endDate) => {
     const startOfDay = new Date(startDate);
-    startOfDay.setHours(0, 0, 0, 0); // 00:00:00 en la zona horaria local
-
+    startOfDay.setHours(0, 0, 0, 0);
     const endOfDay = new Date(endDate);
-    endOfDay.setHours(23, 59, 59, 999); // 23:59:59 en la zona horaria local
-
+    endOfDay.setHours(23, 59, 59, 999);
     return { startOfDay, endOfDay };
   };
 
-  // Función para traer ventas según el rango de fechas
   const TraerVentas = async (params = {}) => {
     setCargando(true);
     try {
-      console.log("Parámetros enviados:", params);
       const { data } = await axios.get("/api/obtenerVentas", { params });
       setVentas(data);
     } catch (error) {
-      console.error("Error:", error);
       setError(error.message);
     } finally {
       setCargando(false);
     }
   };
 
-  // Obtener ventas cuando se selecciona un rango de fechas
   useEffect(() => {
     if (startDate && endDate) {
       const { startOfDay, endOfDay } = ajustarFechasInicioYFin(startDate, endDate);
@@ -53,43 +74,39 @@ export default function Historial() {
     }
   }, [startDate, endDate]);
 
-  // Al cargar la página, obtener las ventas del día actual por defecto
   useEffect(() => {
     const today = new Date();
     const { startOfDay, endOfDay } = ajustarFechasInicioYFin(today, today);
     setStartDate(startOfDay);
     setEndDate(endOfDay);
-  }, []); // Este efecto se ejecuta solo al montar el componente
+  }, []);
 
-  // Manejar la selección del rango de fechas
   const handleSelectRange = (ranges) => {
     const { startDate, endDate } = ranges.selection;
     setStartDate(startDate);
     setEndDate(endDate);
   };
 
-  const columns = ["Fecha", "Cliente", "Total", "Tipo de Venta"];
-
+  const columns = ["ID" ,"Fecha", "Cliente", "Total", "Tipo de Venta"];
+  
   const handleRowClick = (row) => {
-    console.log("Fila seleccionada:", row);
+    const venta = ventas.find((venta) => venta.id === row.id);
+    setVentaSeleccionada(venta);
   };
-
-  const datosTabla = ventas.map((venta) => ({
-    Fecha: venta.fecha,
-    Cliente: venta.cliente.nombre,
-    Total: venta.total.toFixed(2),
-    "Tipo de Venta": venta.tipoVenta || "N/A",
-  }));
 
   const handleToggleCalendario = () => {
     setMostrarCalendario(!mostrarCalendario);
   };
 
+  const handleCloseModal = () => {
+    setVentaSeleccionada(null);
+  };
+
   return (
     <div>
       <Header title="Historial de ventas" />
-      <div className="dropdown">
-        <button className="dropdown-toggle" onClick={handleToggleCalendario}>
+      <div className="dropdown p-4">
+        <button className="dropdown-toggle bg-blue-600 text-white font-bold p-2 rounded-lg" onClick={handleToggleCalendario}>
           Seleccionar rango de fechas
         </button>
         <div
@@ -106,7 +123,6 @@ export default function Historial() {
           />
         </div>
       </div>
-
       {cargando ? (
         <p>Cargando...</p>
       ) : (
@@ -115,13 +131,23 @@ export default function Historial() {
           {ventas.length > 0 ? (
             <StickyTable
               columns={columns}
-              data={datosTabla}
+              data={ventas.map((venta) => ({
+                id: String(venta.id),
+                Fecha: new Date(venta.fecha).toLocaleDateString(),
+                Cliente: venta.cliente.nombre,
+                Total: venta.total.toFixed(2),
+                "Tipo de Venta": venta.serie ? venta.serie.tipo : "N/A",
+                
+              }))}
               onRowClick={handleRowClick}
             />
           ) : (
             <p>No hay resultados para la búsqueda.</p>
           )}
         </>
+      )}
+      {ventaSeleccionada && (
+        <VentaModal venta={ventaSeleccionada} onClose={handleCloseModal} />
       )}
     </div>
   );

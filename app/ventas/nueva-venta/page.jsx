@@ -7,6 +7,8 @@ import Delete from "@/app/assets/delete.png";
 import TipoDeBaucher from "@/app/components/botonDropdown";
 import TextFieldButton from "@/app/components/textFieldButton";
 import loader from "@/app/assets/1494.gif";
+import axios from 'axios';
+
 
 export default function NuevaVenta() {
   const [productos, setProductos] = useState([]);
@@ -194,6 +196,7 @@ const buscarClientes = async () => {
       alert("Por favor, selecciona un cliente antes de realizar la venta.");
       return;
     }
+    
     console.log("Productos seleccionados:", productoSeleccionado);
     console.log("Tipo de venta seleccionado:", tipoSeleccionado);
 
@@ -217,6 +220,11 @@ const buscarClientes = async () => {
           })),
           total: total,
           tipoVenta: tipoSeleccionado,
+          bonificaciones: bonificaciones.map((bonificacion) => ({
+            productoId: bonificacion.productoId,
+            cantidad: bonificacion.cantidad,
+          })),
+        
         }),
       });
 
@@ -232,6 +240,8 @@ const buscarClientes = async () => {
       setClienteSeleccionado(null);
       setBusquedaCliente("");
       setClientesFiltrados([]);
+      setBonificaciones([]);
+  
     } catch (error) {
       console.error("Error al realizar la venta:", error);
       alert(`Error: ${error.message}`);
@@ -239,6 +249,36 @@ const buscarClientes = async () => {
       setCargando(false);
     }
   };
+
+  const [productosBonificados, setProductosBonificados] = useState([]);
+const [mostrarBonificaciones, setMostrarBonificaciones] = useState(false);
+const [bonificaciones, setBonificaciones] = useState([]);
+
+useEffect(() => {
+  const obtenerBonificaciones = async () => {
+    try {
+      const response = await axios.get("/api/bonificaciones");
+      setProductosBonificados(response.data);
+    } catch (error) {
+      console.error("Error al obtener las bonificaciones:", error);
+    }
+  };
+
+  obtenerBonificaciones();
+}, []);
+
+const manejarCantidadBonificacion = (productoId, cantidad) => {
+  setBonificaciones((prev) => {
+    const index = prev.findIndex((b) => b.productoId === productoId);
+    if (index !== -1) {
+      const nuevaBonificacion = [...prev];
+      nuevaBonificacion[index].cantidad = cantidad;
+      return nuevaBonificacion;
+    } else {
+      return [...prev, { productoId, cantidad }];
+    }
+  });
+};
 
   return (
     
@@ -474,6 +514,35 @@ const buscarClientes = async () => {
               </div>
             </div>
             <div className="mt-2 border-b-2"></div>
+            <div className="relative">
+  <button onClick={() => setMostrarBonificaciones(!mostrarBonificaciones)} className="bg-gray-300 text-black p-2 rounded ml-2">
+    Bonificaciones
+  </button>
+  <div className={`absolute z-10 w-64 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-300 ${
+    mostrarBonificaciones ? "max-h-screen opacity-100 p-4" : "max-h-0 opacity-0 p-0"
+  }`}>
+    <ul className="list-disc pl-5">
+      {productosBonificados.length > 0 ? (
+        productosBonificados.map((producto) => (
+          <li key={producto.productoId} className="text-black mt-2 flex items-center justify-between">
+            {producto.producto.nombre}
+            <input
+              type="number"
+              min="0"
+              value={bonificaciones.find((b) => b.productoId === producto.productoId)?.cantidad || 0}
+              onChange={(e) => manejarCantidadBonificacion(producto.productoId, Number(e.target.value))}
+              className="w-12 p-1 border rounded text-center ml-4"
+            />
+          </li>
+        ))
+      ) : (
+        <li>No hay productos bonificados</li>
+      )}
+    </ul>
+  </div>
+</div>
+
+
 
             <div className="flex mt-1 justify-between items-center w-full">
               <p className="font-roboto-condensed font-bold text-sm text-black">
