@@ -130,3 +130,15 @@ model CompraProducto {
   cantidad     Int
   precioCompra Float
 }
+
+model empresa {
+  id         Int       @id @default(autoincrement())
+  nombre     String
+  direccion  String
+  telefono   String
+  email      String    @unique
+  ruc        String    @unique @db.VarChar(11)
+  logo       String?
+  createdAt  DateTime  @default(now())
+}
+

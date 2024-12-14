@@ -61,6 +61,11 @@ const MenuItems = [
            { name: "Rentabilidad", path: "/clientes/cuentas" },
         ]
     },
+    {
+       name: "Configuracion",
+       path: "/configuracion",
+       icon: BiError,
+    }
    
 ];
 
